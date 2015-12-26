@@ -43,3 +43,11 @@
     \vskip 0pt
 }
 \makeatother
+
+\AtEndDocument{%
+    \vspace*{\fill}
+    \begin{center}
+        {\calligra\Huge Fin}
+    \end{center}
+    \vspace*{\fill}
+}
