@@ -82,6 +82,16 @@
            &   & #4 & \mapsto     & #5
     \end{matrix}%
 }
+\makeatletter
+\newcommand{\dalembertian}{%
+    \mathop{}\!\raisebox{-.17\height}{%
+        \begin{tikzpicture}[scale={0.7*\f@size},x=1pt,y=1pt]
+            \draw[line width={0.08*\f@size}] (0.04,0) -- (0.04,0.96) -- (1,0.96);
+            \draw[line width={0.04*\f@size}] (0,0.02) -- (0.98,0.02) -- (0.98,1);
+        \end{tikzpicture}%
+    }%
+}
+\makeatother
 
 % Theorem environments
 \newtheorem{theorem}{Theorem}
