@@ -14,6 +14,8 @@
 \RequirePackage[left=2cm,right=2cm,top=3.2cm,bottom=3.2cm,footskip=1cm]{geometry}
 \fancyhfoffset[E,O]{0pt}
 
+\RequirePackage{xcolor}
+\RequirePackage{framed}
 \makeatletter
 \def\notetaker#1{\gdef\@notetaker{#1}}
 \def\@notetaker{\@latex@warning@no@line{No \noexpand\notetaker given.}}
@@ -23,26 +25,21 @@
 \def\@institution{\@latex@warning@no@line{No \noexpand\institution given.}}
 \def\@maketitle{%
     \begin{center}
-        {\bfseries\Large\@institution}
-    \end{center}
-    \vskip 0pt
-    \begin{center}
-        {\sffamily\bfseries\Huge\@title}
-    \end{center}
-    \vskip 0pt
-    \begin{center}
-        \begin{tabular}{ccc}
-            based on a course given by &\quad\quad& written up by \\
-            {\Large\@lecturer}&&{\Large\@notetaker}
+        \begin{tabular}{c}
+            {\bfseries\Large\@institution}\\[0.6em]
+            {\@date}\\[1em]
+            \setlength{\fboxsep}{3em}\fcolorbox{white}{black!10}{\sffamily\bfseries\Huge\@title}\\
+            \\[.5em]
+            \begin{tabular}{ccc}
+                based on a course given by &\quad\quad& written up by \\[0.4em]
+                {\Large\@lecturer}&&{\Large\@notetaker}
+            \end{tabular}
         \end{tabular}
+        \vspace{0.4em}
     \end{center}
-    \vskip 0pt
-    \begin{center}
-        {\Large\@date}
-    \end{center}
-    \vskip 0pt
 }
 \makeatother
+
 
 \AtEndDocument{%
     \vspace*{\fill}

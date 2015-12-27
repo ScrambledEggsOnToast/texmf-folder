@@ -28,6 +28,7 @@
 \RequirePackage{cancel} % Notation cancellation
 \RequirePackage{bbm} % Set symbols
 \RequirePackage{framed} % Frames
+\RequirePackage[framemethod=TikZ]{mdframed} % Frames
 \RequirePackage{float} % More precise floats
 \RequirePackage{wrapfig} % Text wrap around floats
 \RequirePackage{subfig} % Sub figures
@@ -82,47 +83,60 @@
            &   & #4 & \mapsto     & #5
     \end{matrix}%
 }
+
+% Custom TikZ symbols
+
 \makeatletter
+\def\tikzsymbolthickness{0.12}
 \newcommand{\dalembertian}{%
-    \mathop{}\!\raisebox{-.17\height}{%
-        \begin{tikzpicture}[scale={0.7*\f@size},x=1pt,y=1pt]
-            \draw[line width={0.08*\f@size}] (0.04,0) -- (0.04,0.96) -- (1,0.96);
-            \draw[line width={0.04*\f@size}] (0,0.02) -- (0.98,0.02) -- (0.98,1);
+    \mathop{}\!\raisebox{-.12\height}{%
+        \begin{tikzpicture}[scale={0.72*\f@size},x=1pt,y=1pt]
+            \fill (0,0) rectangle (1,1);
+            \fill[white] (\tikzsymbolthickness,{\tikzsymbolthickness/2}) rectangle ({1-\tikzsymbolthickness/2},{1-\tikzsymbolthickness});
         \end{tikzpicture}%
     }%
 }
 \makeatother
 
+\RequirePackage{yfonts}
+
 % Theorem environments
-\newtheorem{theorem}{Theorem}
-\newtheorem*{lemma}{Lemma}
-\newtheorem{prop}{Proposition}
-\newtheorem*{cor}{Corollary}
-\makeatletter
-\newtheoremstyle{@example}%
-    {}{}%
-    {}{-1em}%
-    {\bfseries}%
-    {}{\newline}%
-    {}
-\theoremstyle{@example}
-\newtheorem*{@eg}{Example}
-\newenvironment{eg}{
-    \begin{addmargin}[1em]{0em}
-        \leavevmode \vspace{-\baselineskip}
-        \begin{@eg}}{\end{@eg}\end{addmargin}}
-\makeatother
+\newtheorem{theorem}{\raisebox{-.06\height}{\swabfamily\Large Theorem}}
+\newtheorem{lemma}{\raisebox{-.06\height}{\swabfamily\Large Lemma}}
+\newtheorem*{cor}{\raisebox{-.06\height}{\swabfamily\Large Corollary}}
 \theoremstyle{definition}
+\definecolor{ExampleColor}{rgb}{0.05,0.4,0.7}
+\newtheorem*{@eg}{Example}
+\newenvironment{eg}
+{\begin{@eg}
+    \def\FrameCommand
+    {%
+        \fboxsep=\FrameSep\fcolorbox{ExampleColor!40!black}{ExampleColor!4}%
+    }%
+    \MakeFramed{\hsize\hsize\advance\hsize-\width\FrameRestore}%
+}
+{%
+    \endMakeFramed
+    \end{@eg}
+}
+\makeatother
+\definecolor{DefinitionColor}{rgb}{0.29,0.5,0.13}
 \makeatletter
 \newtheorem*{@defn}{Definition}
 \newenvironment{defn}
-    {\begin{leftbar}
-        \begin{@defn}
-    }
-    {
-        \end{@defn}
-    \end{leftbar}
-    }
+{\begin{@defn}
+    \def\FrameCommand
+    {%
+        {\color{DefinitionColor}\vrule width 0.2em}%
+        \hspace{0.em}%
+        \fboxsep=\FrameSep\colorbox{DefinitionColor!7}%
+    }%
+    \MakeFramed{\hsize\hsize\advance\hsize-\width\FrameRestore}%
+}
+{%
+    \endMakeFramed
+    \end{@defn}
+}
 \makeatother
 \makeatletter
 \newtheorem*{@unlectured}{Unlectured}
