@@ -34,7 +34,6 @@
 \RequirePackage{subfig} % Sub figures
 \RequirePackage{calligra} % Calligra font
 \RequirePackage{totcount} % Total counters
-\RequirePackage{xltxtra} % XeTeX goodies
 \RequirePackage{physics} % Lots of useful notation for physics
 
 %%%% Command definitions
@@ -54,7 +53,7 @@
     {\@trans{#1}^{}}%
 }
 \def\@trans#1^#2{%
-    #1^{\intercal #2}%
+    {#1}^{\intercal #2}%
 }
 \makeatother
 \newcommand{\herm}{} % Hermitian conjugate
@@ -65,7 +64,7 @@
     {\@herm{#1}^{}}%
 }
 \def\@herm#1^#2{%
-    #1^{\dagger #2}%
+    {#1}^{\dagger #2}%
 }
 \makeatother
 \newcommand{\identity}{\mathbbm{1}} % Identity
@@ -83,6 +82,8 @@
            &   & #4 & \mapsto     & #5
     \end{matrix}%
 }
+\newcommand{\lint}[2][3]{\int\frac{\dd[#1]{#2}}{(2\pi)^{#1}}\frac{1}{2E_{\vb{#2}}}} % Lorentz invariant measure
+\newcommand{\normord}[1]{\mathop{:}\nolimits\!#1\!\mathop{:}\nolimits} % normal ordering
 
 % Custom TikZ symbols
 
@@ -206,7 +207,13 @@
     \end{unlectured}%
 }
 \newcommand{\disapprovalspiel}{%
-    I may sometimes only accept the mathematical validity of something with a certain amount of anger; such occasions will be indicated with a look of disapproval: \disapprove\addtocounter{disapproval}{-1}. There are \total{disapproval} such looks of disapproval in these notes.%
+    I may sometimes only accept the mathematical validity of something with a certain amount of anger; such occasions will be indicated with a look of disapproval: \disapprove\addtocounter{disapproval}{-1}. There %
+    \ifnum\totvalue{disapproval}=1{%
+        is 1 such look %
+    }\else{%
+        are \total{disapproval} such looks %
+    }\fi%
+    of disapproval in these notes.%
 }
 \newcommand{\suggestionsspiel}{%
     \begin{center}
