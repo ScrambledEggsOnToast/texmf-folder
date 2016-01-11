@@ -16,6 +16,7 @@
 
 \RequirePackage{xcolor}
 \RequirePackage{framed}
+\RequirePackage{varwidth}
 \makeatletter
 \def\notetaker#1{\gdef\@notetaker{#1}}
 \def\@notetaker{\@latex@warning@no@line{No \noexpand\notetaker given.}}
@@ -28,7 +29,7 @@
         \begin{tabular}{c}
             {\bfseries\Large\@institution}\\[0.6em]
             {\@date}\\[1em]
-            \setlength{\fboxsep}{3em}\fcolorbox{white}{black!10}{\sffamily\bfseries\Huge\@title}\\
+            \setlength{\fboxsep}{3em}\fcolorbox{white}{black!10}{\begin{varwidth}{\dimexpr\linewidth-2\fboxsep-2\fboxrule}\centering\sffamily\bfseries\Huge\@title\end{varwidth}}\\
             \\[.5em]
             \begin{tabular}{ccc}
                 based on a course given by &\quad\quad& written up by \\[0.4em]
