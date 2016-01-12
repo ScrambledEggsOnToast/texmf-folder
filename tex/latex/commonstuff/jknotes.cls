@@ -11,7 +11,7 @@
     showonlyrefs=true % Only number referenced equations
 }
 
-\RequirePackage[left=2cm,right=2cm,top=3.2cm,bottom=3.2cm,footskip=1cm]{geometry}
+\RequirePackage[left=2.3cm,right=2.3cm,top=3.2cm,bottom=3.2cm,footskip=1cm,marginparwidth=1.5cm]{geometry}
 \fancyhfoffset[E,O]{0pt}
 
 \RequirePackage{xcolor}
@@ -41,6 +41,8 @@
 }
 \makeatother
 
+\newcounter{lecturenum}
+\newcommand{\lecture}[1]{{\stepcounter{lecturenum}\reversemarginpar\marginpar{\raggedleft\scriptsize\textbf{Lecture \thelecturenum} #1}\reversemarginpar}}
 
 \AtEndDocument{%
     \vspace*{\fill}
