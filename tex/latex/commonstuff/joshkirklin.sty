@@ -35,6 +35,7 @@
 \RequirePackage{calligra} % Calligra font
 \RequirePackage{totcount} % Total counters
 \RequirePackage{physics} % Lots of useful notation for physics
+\RequirePackage[nointegrals]{wasysym} % Astronomical symbols
 
 %%%% Command definitions
 
@@ -84,6 +85,22 @@
 }
 \newcommand{\lint}[2][3]{\int\frac{\dd[#1]{#2}}{(2\pi)^{#1}}\frac{1}{2E_{\vb{#2}}}} % Lorentz invariant measure
 \newcommand{\normord}[1]{\mathop{:}\nolimits\!#1\!\mathop{:}\nolimits} % normal ordering
+
+% capital differentials
+
+\def\diffD{\mathrm{D}}
+\DeclareDocumentCommand\Differential{ o g d() }{ % Differential 'd'
+	% o: optional n for nth differential
+	% g: optional argument for readability and to control spacing
+	% d: long-form as in d(cos x)
+	\IfNoValueTF{#2}{
+		\IfNoValueTF{#3}
+			{\diffd\IfNoValueTF{#1}{}{^{#1}}}
+			{\mathinner{\diffd\IfNoValueTF{#1}{}{^{#1}}\argopen(#3\argclose)}}
+		}
+		{\mathinner{\diffD\IfNoValueTF{#1}{}{^{#1}}#2} \IfNoValueTF{#3}{}{(#3)}}
+	}
+\DeclareDocumentCommand\Dd{}{\Differential} % Shorthand for \Differential
 
 % Custom TikZ symbols
 
@@ -163,7 +180,7 @@
         \end{scope}
     \end{tikzpicture}%
 }
-\newcommand{\disapprovepar}{\marginpar[]{\Disapprove}}
+\newcommand{\disapprovemargin}{\marginpar[]{\disapprove}}
 \newcommand{\disapproval}{\total{disapproval}}
 
 % Feyman tikz
@@ -192,9 +209,12 @@
         amplitude=3%
     }
 }}
-\newcommand{\fermion}[3][]{\draw[fermion] (#2) -- (#3) node[midway, above, sloped] {#1}}
-\newcommand{\photon}[3][]{\draw[photon] (#2) -- (#3) node[midway, above, sloped] {#1}}
-\newcommand{\gluon}[3][]{\draw[gluon] (#2) -- (#3) node[midway, above, sloped] {#1}}
+\providecommand\fermion{}
+\providecommand\photon{}
+\providecommand\gluon{}
+\renewcommand{\fermion}[3][]{\draw[fermion] (#2) -- (#3) node[midway, above, sloped] {#1}}
+\renewcommand{\photon}[3][]{\draw[photon] (#2) -- (#3) node[midway, above, sloped] {#1}}
+\renewcommand{\gluon}[3][]{\draw[gluon] (#2) -- (#3) node[midway, above, sloped] {#1}}
 
 \newcommand{\exvertex}[2]{\coordinate(#1) at (#2)}
 \newcommand{\invertex}[2]{\exvertex{#1}{#2}; \fill (#2) circle (0.05)}
